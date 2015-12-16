@@ -8,7 +8,6 @@ Gem::Specification.new do |spec|
   spec.version       = Randomid::VERSION
   spec.authors       = ["Harry Lucas"]
   spec.email         = ["Harrisonlucas@Live.com"]
-
   spec.summary       = %q{Gem for creating UID on ActiveRecord Models}
   spec.homepage      = "https://github.com/Harrisonl/randomid"
   spec.license       = "MIT"
