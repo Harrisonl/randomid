@@ -1,8 +1,14 @@
 # Randomid
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/randomid`. To experiment with that code, run `bin/console` for an interactive prompt.
+RandomId was a gem created partly due to the frustration and partly due to wanting to have a go at creating a gem. Most of the time with a rails app, every model will be referenced in the URL by http://example.com/user/1. This makes it easy for users to know exactly how many of each model you have in the database which can lead to all sorts of problems. Me - I just don't like other users knowing how many objects there are.
 
-TODO: Delete this and the text above, and describe your gem
+This gem therefore makes it so that when an object is created it will generate a randon uid up to 22 characters long that you can use anywhere in your app. For example:
+
+```ruby
+#project/config/routes.rb
+get 'users/:uid', to: 'users#show'
+```
+
 
 ## Installation
 
@@ -22,7 +28,25 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Firstly, you need to make sure that each model you want to have a unique identifier for, you add an attribute to that model. 
+
+E.g.
+If I wanted the User model to have a unique identifier I would add a "uid" attribute of type string. 
+
+*Note: You can name this attribute whatever you like*
+
+Next navigate to that class's model file and add the following line:
+
+```ruby
+class User < ActiveRecord::Base
+  unique_identifier :uid, 8
+end
+```
+
+Where ":uid" is the attribute you created above and "8" is the length of the UID (between 1 - 22 characters).
+
+From there, you are good to go - everytime a new object is created, a unique id will be assigned. **This ID will not clash with any other values in the database**
+
 
 ## Development
 
@@ -32,7 +56,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/randomid. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/harrisonl/randomid. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](contributor-covenant.org) code of conduct.
 
 
 ## License
