@@ -4,14 +4,13 @@ module Randomid
 
     def unique_identifier(attribute, length=16)
       before_create do 
-        send("#{attribute}=", Randomid.generate_uid(length))
+        loop do
+          token = Randomid.generate_uid(length)
+          break send("#{attribute}=", token) unless self.class.exists?("#{attribute}" => token)
+        end
       end
     end
 
 
   end
 end
-      #object.uid = loop do
-      #  token = SecureRandom.urlsafe_base64(16)
-      #  break token unless object.class.exists?("#{attribute}" => token)
-      #end
