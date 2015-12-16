@@ -1,6 +1,7 @@
 require "randomid/version"
 require "randomid/model_additions"
 require 'securerandom'
+require 'randomid/railtie' if defined? Rails
 
 module Randomid
 
