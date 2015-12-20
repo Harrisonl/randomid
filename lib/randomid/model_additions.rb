@@ -1,4 +1,3 @@
-
 module Randomid
   module ModelAdditions
 
@@ -10,7 +9,5 @@ module Randomid
         end
       end
     end
-
-
   end
 end
